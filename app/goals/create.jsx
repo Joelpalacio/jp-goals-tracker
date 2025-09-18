@@ -7,17 +7,16 @@ import { useRouter } from 'expo-router'
 const Create = () => {
   const [goal, setGoal] = useState('')
   const { createGoal } = useGoals()
-  const router = useRouter
- 
+  const router = useRouter()  // <-- FIXED (add parentheses)
+
   const handleSubmit = async () => {
     await createGoal({
       goal,
-      progress:0
+      progress: 0,
     })
     setGoal('')
     Keyboard.dismiss()
-    router.push('/goals')
-
+    router.push('/goals') // now works ✅
   }
 
   return (
@@ -32,7 +31,7 @@ const Create = () => {
       />
 
       <Pressable onPress={handleSubmit} style={styles.button}>
-        <Text style={{color: 'white'}}>Add New Goal</Text>
+        <Text style={{ color: 'white' }}>Add New Goal</Text>
       </Pressable>
     </SafeAreaView>
   )
@@ -61,5 +60,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#21cc8d',
     color: 'white',
     borderRadius: 8,
-  }
+  },
 })
